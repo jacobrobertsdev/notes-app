@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  padding: 1.5rem 1rem 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+header input {
+  max-width: 70%;
+  flex-grow: 1;
+  padding: 0.2rem;
+}
+
+header button {
+  padding: 0.4rem;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.note {
+  padding: 1rem;
+  border: 2px solid black;
+  background-color: lightgrey;
+}
+
+.note button {
+  padding: 0.2rem;
+}
+
+.note-title {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.note-body {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
