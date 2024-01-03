@@ -5,16 +5,23 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.hidden {
+  display: none;
+}
+
 header {
+  margin: 0 auto;
+  max-width: 90%;
   padding: 1.5rem 1rem 1rem 1rem;
   display: flex;
   justify-content: space-between;
 }
 
 header input {
-  max-width: 70%;
+  max-width: 80%;
+  margin-right: 0.5rem;
   flex-grow: 1;
-  padding: 0.2rem;
+  padding: 0 0.5rem;
 }
 
 header button {
@@ -29,6 +36,27 @@ main {
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
+}
+
+.new-note-form form {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-note-title,
+.new-note-text {
+  width: 100%;
+  padding: 0.2rem;
+  flex-grow: 1;
+}
+
+.save-new-note {
+  padding: 0.2rem;
+  width: 100%;
 }
 
 .note {
