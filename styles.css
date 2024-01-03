@@ -30,12 +30,20 @@ header button {
 
 main {
   margin: 0 auto;
-  max-width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem;
+  max-width: 80%;
+}
+
+.all-notes {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .new-note-form form {
@@ -49,17 +57,17 @@ main {
 
 .new-note-title,
 .new-note-text {
-  width: 100%;
   padding: 0.2rem;
   flex-grow: 1;
 }
 
 .save-new-note {
   padding: 0.2rem;
-  width: 100%;
 }
 
 .note {
+  height: auto;
+  min-width: 18rem;
   padding: 1rem;
   border: 2px solid black;
   background-color: lightgrey;
@@ -79,4 +87,6 @@ main {
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
   line-height: 1.4;
+  word-wrap: break-word;
+  max-width: 90%;
 }

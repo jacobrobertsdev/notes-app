@@ -15,33 +15,28 @@
         class="search"
         placeholder="Search notes..."
       />
-      <button class="add-note-button" aria-label="Add a new note">+ New</button>
     </header>
     <main>
-      <section class="new-note-form hidden">
+      <section class="new-note-form">
         <form>
-          <input type="text" class="new-note-title" placeholder="Title" />
+          <input
+            type="text"
+            class="new-note-title"
+            placeholder="Title"
+            required
+          />
           <textarea
             class="new-note-text"
-            cols="40"
-            rows="8"
+            cols="30"
+            rows="5"
             placeholder="Add note..."
+            required
           ></textarea>
           <button class="save-new-note">Save</button>
         </form>
       </section>
 
-      <div class="note">
-        <p class="note-title">This is a note title</p>
-        <p class="note-body" contenteditable="false">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. In voluptas
-          quos vero similique, sunt dolorem vel accusantium modi sint facilis
-          nam rerum, excepturi numquam tempora eum officia possimus.
-          Repudiandae, explicabo?
-        </p>
-        <button class="edit-note">Edit</button>
-        <button class="delete-note">Delete</button>
-      </div>
+      <section class="all-notes"></section>
     </main>
     <script src="app.js"></script>
   </body>
