@@ -11,6 +11,8 @@ A responsive web application for creating post-it style notes.
 
 <img src="Images/Screen Shot 2024-01-04 at 12.14.04 PM.png" alt="Screenshot">
 
+<img src="Images/Screen Shot 2024-01-04 at 12.12.23 PM.png" alt="Mobile Screenshot">
+
 ## Built Using
 
 - Mobile-first approach
