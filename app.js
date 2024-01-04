@@ -86,15 +86,19 @@ function createNoteDOM(obj, id) {
       }
     });
     localStorage.setItem("Notes", JSON.stringify(newArray));
+    newNoteBody.setAttribute("contenteditable", "false");
     saveButton.classList.toggle("hidden");
     editButton.classList.toggle("hidden");
     cancelButton.classList.toggle("hidden");
   });
 
   cancelButton.addEventListener("click", () => {
+    newNoteBody.textContent = obj.body;
     newNoteBody.setAttribute("contenteditable", "false");
     newNoteBody.blur();
     cancelButton.classList.toggle("hidden");
+    saveButton.classList.toggle("hidden");
+    editButton.classList.toggle("hidden");
   });
 
   const deleteButton = document.createElement("button");
@@ -151,6 +155,7 @@ saveNoteButton.addEventListener("click", () => {
     return;
   }
   createNote();
+  clearInput();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -176,4 +181,8 @@ noteFilter.addEventListener("keyup", () => {
       title.parentElement.classList.remove("hidden");
     }
   }
+});
+
+newNoteForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 });

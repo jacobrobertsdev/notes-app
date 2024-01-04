@@ -2,14 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 :root {
   --background: #f2f9f8;
   --accent: #818181;
   --neutral: #2b3e4f;
-  --text: #050807;
+  --text: #000000;
+  --headings: "Comfortaa", sans-serif;
+  --body: "Poppins", sans-serif;
 }
 
 body {
@@ -20,34 +21,42 @@ body {
   display: none;
 }
 
+button {
+  transition: all 0.15s ease;
+}
+
 button:hover {
   cursor: pointer;
+  opacity: 0.8;
 }
 
 header {
-  margin: 0 auto;
+  margin: 1rem auto 0 auto;
   max-width: 90%;
-  padding: 1.5rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 0 1rem;
   display: flex;
   justify-content: space-between;
 }
 
 header input {
-  max-width: 80%;
-  margin-right: 0.5rem;
-  flex-grow: 1;
+  font-family: var(--body);
+  height: 2rem;
+  width: 11.5rem;
+  margin-right: 0.25rem;
   color: var(--text);
-  padding: 0 0.5rem;
+  padding: 0.2rem 0 0.2rem 0.8rem;
   background: transparent;
   border-radius: 10000px;
   border: 2px solid var(--accent);
 }
 
 header button {
+  font-family: var(--body);
   font-size: 0.75rem;
+  font-weight: 400;
   padding: 0.4rem;
   background: var(--neutral);
-  color: var(--background);
+  color: white;
   border-radius: 5px;
   border: none;
 }
@@ -68,10 +77,11 @@ main {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .new-note-form form {
-  margin: 1rem 0;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -81,8 +91,9 @@ main {
 
 .new-note-title,
 .new-note-text {
+  font-family: var(--body);
   width: 100%;
-  padding: 0.4rem;
+  padding: 0.3rem;
   background: transparent;
   border-radius: 5px;
   border: 2px solid var(--accent);
@@ -90,11 +101,14 @@ main {
 }
 
 .save-new-note {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  font-weight: 400;
   width: 100%;
   padding: 0.4rem;
   background: var(--neutral);
   border-radius: 5px;
-  color: var(--background);
+  color: white;
   border: none;
 }
 
@@ -108,14 +122,11 @@ main {
   background: var(--background);
 }
 
-.edit-note,
-.cancel,
-.save-note {
-  margin-right: 0.5rem;
-}
-
 .note button {
-  font-size: 0.75rem;
+  font-family: var(--body);
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 400;
   padding: 0.4rem;
   background: transparent;
   color: var(--text);
@@ -123,13 +134,23 @@ main {
   border: 1px solid var(--text);
 }
 
+.note button:hover {
+  background-color: var(--text);
+  color: var(--background);
+}
+
 .note-title {
+  font-family: var(--headings);
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .note-body {
+  font-family: var(--body);
+  font-weight: 400;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
   line-height: 1.4;
@@ -138,6 +159,29 @@ main {
 }
 
 .note-date {
+  font-family: var(--body);
+  font-weight: 300;
   font-size: 0.8rem;
   margin-bottom: 1rem;
+}
+
+@media (min-width: 700px) {
+  .all-notes {
+    margin-top: 0.75rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  header input {
+    width: 15rem;
+  }
+
+  header button {
+    font-size: 0.9rem;
+  }
+
+  .note {
+    min-height: 10rem;
+  }
 }
