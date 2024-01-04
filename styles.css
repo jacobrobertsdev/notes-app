@@ -5,8 +5,23 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+:root {
+  --background: #f2f9f8;
+  --accent: #818181;
+  --neutral: #2b3e4f;
+  --text: #050807;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background);
+}
 .hidden {
   display: none;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 header {
@@ -21,11 +36,20 @@ header input {
   max-width: 80%;
   margin-right: 0.5rem;
   flex-grow: 1;
+  color: var(--text);
   padding: 0 0.5rem;
+  background: transparent;
+  border-radius: 10000px;
+  border: 2px solid var(--accent);
 }
 
 header button {
+  font-size: 0.75rem;
   padding: 0.4rem;
+  background: var(--neutral);
+  color: var(--background);
+  border-radius: 5px;
+  border: none;
 }
 
 main {
@@ -57,24 +81,45 @@ main {
 
 .new-note-title,
 .new-note-text {
-  padding: 0.2rem;
-  flex-grow: 1;
+  width: 100%;
+  padding: 0.4rem;
+  background: transparent;
+  border-radius: 5px;
+  border: 2px solid var(--accent);
+  color: var(--text);
 }
 
 .save-new-note {
-  padding: 0.2rem;
+  width: 100%;
+  padding: 0.4rem;
+  background: var(--neutral);
+  border-radius: 5px;
+  color: var(--background);
+  border: none;
 }
 
 .note {
   height: auto;
   min-width: 18rem;
+  max-width: 100%;
   padding: 1rem;
-  border: 2px solid black;
-  background-color: lightgrey;
+  color: var(--text);
+  border-radius: 5px;
+  border: 2px solid var(--neutral);
+  background: var(--background);
+}
+
+.edit-note {
+  margin-right: 0.5rem;
 }
 
 .note button {
-  padding: 0.2rem;
+  font-size: 0.75rem;
+  padding: 0.4rem;
+  background: transparent;
+  color: var(--text);
+  border-radius: 3px;
+  border: 1px solid var(--text);
 }
 
 .note-title {
@@ -88,5 +133,5 @@ main {
   font-size: 0.9rem;
   line-height: 1.4;
   word-wrap: break-word;
-  max-width: 90%;
+  white-space: pre-wrap;
 }

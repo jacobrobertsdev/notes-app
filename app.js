@@ -6,6 +6,8 @@ const notes = document.querySelectorAll(".note");
 const mainContent = document.querySelector("main");
 const addNoteButton = document.querySelector(".add-note-button");
 const notesContainer = document.querySelector(".all-notes");
+const clearAll = document.querySelector(".clear-all");
+const noteFilter = document.querySelector(".search");
 
 const allNotes = [];
 
@@ -42,6 +44,11 @@ function createNote() {
   editButton.textContent = "Edit";
   newNote.appendChild(editButton);
 
+  editButton.addEventListener("click", () => {
+    newNoteBody.setAttribute("contenteditable", "true");
+    newNoteBody.focus();
+  });
+
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-note");
   deleteButton.textContent = "Delete";
@@ -68,6 +75,7 @@ function getLocalStorage() {
       createNote();
     }
   }
+  clearInput();
 }
 
 // Save to local storage
@@ -91,12 +99,34 @@ mainContent.addEventListener("click", (e) => {
 });
 
 saveNoteButton.addEventListener("click", () => {
+  if (noteTitle.value === "" || noteBody.value === "") {
+    alert("Please enter a valid input");
+    return;
+  }
   createNote();
-  clearInput();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   allNotes.length = 0; // Clear the array before populating it
   getLocalStorage();
-  clearInput();
+});
+
+clearAll.addEventListener("click", () => {
+  allNotes.length = 0;
+  saveLocalStorage();
+  getLocalStorage();
+  window.location.reload();
+});
+
+noteFilter.addEventListener("keyup", () => {
+  const titles = document.querySelectorAll(".note-title");
+  const query = noteFilter.value.toLowerCase();
+
+  for (let title of titles) {
+    if (!title.textContent.toLowerCase().includes(query)) {
+      title.parentElement.classList.add("hidden");
+    } else {
+      title.parentElement.classList.remove("hidden");
+    }
+  }
 });
