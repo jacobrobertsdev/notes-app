@@ -149,6 +149,14 @@ mainContent.addEventListener("click", (e) => {
   }
 });
 
+// Create DOM on reload
+document.addEventListener("DOMContentLoaded", () => {
+  allNotes.length = 0; // Clear the array before populating it
+  getLocalStorage();
+});
+
+//-------------Button Events------------------
+// Save new note
 saveNoteButton.addEventListener("click", () => {
   if (noteTitle.value === "" || noteBody.value === "") {
     alert("Please enter a valid input");
@@ -158,11 +166,12 @@ saveNoteButton.addEventListener("click", () => {
   clearInput();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  allNotes.length = 0; // Clear the array before populating it
-  getLocalStorage();
+// Prevent default form behavior
+newNoteForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 });
 
+// Clear all notes
 clearAll.addEventListener("click", () => {
   allNotes.length = 0;
   saveLocalStorage();
@@ -170,6 +179,7 @@ clearAll.addEventListener("click", () => {
   window.location.reload();
 });
 
+// ---------------Filter notes with search---------------
 noteFilter.addEventListener("keyup", () => {
   const titles = document.querySelectorAll(".note-title");
   const query = noteFilter.value.toLowerCase();
@@ -181,8 +191,4 @@ noteFilter.addEventListener("keyup", () => {
       title.parentElement.classList.remove("hidden");
     }
   }
-});
-
-newNoteForm.addEventListener("submit", (e) => {
-  e.preventDefault();
 });
