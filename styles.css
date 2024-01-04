@@ -108,7 +108,8 @@ main {
   background: var(--background);
 }
 
-.edit-note {
+.edit-note,
+.cancel {
   margin-right: 0.5rem;
 }
 

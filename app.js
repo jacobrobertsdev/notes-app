@@ -51,9 +51,22 @@ function createNote() {
   editButton.textContent = "Edit";
   newNote.appendChild(editButton);
 
+  const cancelButton = document.createElement("button");
+  cancelButton.textContent = "Cancel";
+  newNote.appendChild(cancelButton);
+  cancelButton.classList.add("cancel");
+  cancelButton.classList.toggle("hidden");
+
   editButton.addEventListener("click", (e) => {
+    cancelButton.classList.remove("hidden");
     newNoteBody.setAttribute("contenteditable", "true");
     newNoteBody.focus();
+  });
+
+  cancelButton.addEventListener("click", () => {
+    newNoteBody.setAttribute("contenteditable", "false");
+    newNoteBody.blur();
+    cancelButton.classList.toggle("hidden");
   });
 
   const deleteButton = document.createElement("button");
