@@ -72,6 +72,7 @@ function createNoteDOM(obj, id) {
     saveButton.classList.toggle("hidden");
     editButton.classList.toggle("hidden");
     newNoteBody.setAttribute("contenteditable", "true");
+    newNoteBody.style.fontStyle = "italic";
     newNoteBody.focus();
   });
 
@@ -90,6 +91,7 @@ function createNoteDOM(obj, id) {
     saveButton.classList.toggle("hidden");
     editButton.classList.toggle("hidden");
     cancelButton.classList.toggle("hidden");
+    newNoteBody.style.fontStyle = "normal";
   });
 
   cancelButton.addEventListener("click", () => {
@@ -99,6 +101,7 @@ function createNoteDOM(obj, id) {
     cancelButton.classList.toggle("hidden");
     saveButton.classList.toggle("hidden");
     editButton.classList.toggle("hidden");
+    newNoteBody.style.fontStyle = "normal";
   });
 
   const deleteButton = document.createElement("button");
