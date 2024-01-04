@@ -8,15 +8,17 @@ const addNoteButton = document.querySelector(".add-note-button");
 const notesContainer = document.querySelector(".all-notes");
 const clearAll = document.querySelector(".clear-all");
 const noteFilter = document.querySelector(".search");
+const updateButton = document.querySelector(".update-note");
 
 const allNotes = [];
 
 // Add the new item to the DOM (without .innerHTML)
 function createNote() {
+  const noteDate = new Date().toLocaleDateString();
   const uniqueId = crypto.randomUUID().toString();
-
   const note = {
     id: uniqueId,
+    date: noteDate,
     title: noteTitle.value,
     body: noteBody.value,
   };
@@ -39,12 +41,17 @@ function createNote() {
   newNoteBody.textContent = note.body;
   newNote.appendChild(newNoteBody);
 
+  const date = document.createElement("p");
+  date.classList.add("note-date");
+  date.textContent = note.date;
+  newNote.appendChild(date);
+
   const editButton = document.createElement("button");
   editButton.classList.add("edit-note");
   editButton.textContent = "Edit";
   newNote.appendChild(editButton);
 
-  editButton.addEventListener("click", () => {
+  editButton.addEventListener("click", (e) => {
     newNoteBody.setAttribute("contenteditable", "true");
     newNoteBody.focus();
   });

@@ -100,8 +100,7 @@ main {
 
 .note {
   height: auto;
-  min-width: 18rem;
-  max-width: 100%;
+  width: 18rem;
   padding: 1rem;
   color: var(--text);
   border-radius: 5px;
@@ -134,4 +133,9 @@ main {
   line-height: 1.4;
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+
+.note-date {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
 }
