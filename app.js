@@ -3,7 +3,7 @@ const noteTitle = document.querySelector(".new-note-title");
 const noteBody = document.querySelector(".new-note-text");
 const saveNoteButton = document.querySelector(".save-new-note");
 const notes = document.querySelectorAll(".note");
-const mainContent = document.querySelector("main");
+const mainContent = document.querySelector(".all-notes");
 const addNoteButton = document.querySelector(".add-note-button");
 const notesContainer = document.querySelector(".all-notes");
 const clearAll = document.querySelector(".clear-all");
@@ -139,16 +139,18 @@ function saveLocalStorage() {
 
 // Remove items from local storage and update DOM
 mainContent.addEventListener("click", (e) => {
-  const data = JSON.parse(localStorage.getItem("Notes")) || [];
+  if (mainContent.hasChildNodes()) {
+    const data = JSON.parse(localStorage.getItem("Notes")) || [];
 
-  const target = e.target;
-  const note = e.target.closest("div");
-  const noteId = note.getAttribute("id").toString();
+    const target = e.target;
+    const note = e.target.closest("div");
+    const noteId = note.getAttribute("id").toString();
 
-  if (target.classList.contains("delete-note")) {
-    const newArray = data.filter((currentNote) => noteId != currentNote.id);
-    note.remove();
-    localStorage.setItem("Notes", JSON.stringify(newArray));
+    if (target.classList.contains("delete-note")) {
+      const newArray = data.filter((currentNote) => noteId != currentNote.id);
+      note.remove();
+      localStorage.setItem("Notes", JSON.stringify(newArray));
+    }
   }
 });
 
