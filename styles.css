@@ -101,6 +101,10 @@ main {
   color: var(--text);
 }
 
+textarea {
+  resize: none;
+}
+
 .save-new-note {
   font-family: var(--body);
   font-size: 0.9rem;
