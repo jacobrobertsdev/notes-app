@@ -178,12 +178,17 @@ newNoteForm.addEventListener("submit", (e) => {
 
 // Clear all notes
 clearAll.addEventListener("click", () => {
-  allNotes.length = 0;
-  saveLocalStorage();
-  getLocalStorage();
-  window.location.reload();
-});
+  if (confirm("Are you sure you want to clear all of your notes?")) {
+    // Remove all note elements from the DOM
+    while (notesContainer.firstChild) {
+      notesContainer.removeChild(notesContainer.firstChild);
+    }
 
+    // Clear the array and local storage
+    allNotes.length = 0;
+    localStorage.clear();
+  }
+});
 // ---------------Filter notes with search---------------
 noteFilter.addEventListener("keyup", () => {
   const titles = document.querySelectorAll(".note-title");
