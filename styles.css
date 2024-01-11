@@ -5,12 +5,19 @@
 }
 
 :root {
-  --background: #f2f9f8;
-  --accent: #818181;
-  --neutral: #2b3e4f;
-  --text: #000000;
+  --background: #39393a;
+  --offset: #464648;
+  --inputs: #5e5e61;
+  --accent: #e6e6e6;
+  --neutral: #b0b0b0;
+  --text: white;
   --headings: "Comfortaa", sans-serif;
   --body: "Poppins", sans-serif;
+  --box-shadow: 1px 3px 9px -6px black;
+}
+
+::placeholder {
+  color: var(--accent);
 }
 
 body {
@@ -25,18 +32,13 @@ button {
   transition: all 0.15s ease;
 }
 
-button:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
 header {
   margin: 1rem auto 0 auto;
   max-width: 90%;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--neutral);
 }
 
 header input {
@@ -46,20 +48,22 @@ header input {
   margin-right: 0.25rem;
   color: var(--text);
   padding: 0.2rem 0 0.2rem 0.8rem;
-  background: transparent;
+  background: var(--inputs);
   border-radius: 10000px;
-  border: 2px solid var(--accent);
+  border: none;
 }
 
 header button {
   font-family: var(--body);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  padding: 0.4rem;
-  background: var(--neutral);
-  color: white;
-  border-radius: 5px;
+  letter-spacing: 0.05rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--offset);
+  color: var(--text);
+  border-radius: 99999px;
   border: none;
+  box-shadow: var(--box-shadow);
 }
 
 main {
@@ -94,11 +98,12 @@ main {
 .new-note-text {
   font-family: var(--body);
   width: 100%;
-  padding: 0.3rem;
+  padding: 0.5rem;
   background: transparent;
   border-radius: 5px;
-  border: 2px solid var(--accent);
+  border: none;
   color: var(--text);
+  background: var(--inputs);
 }
 
 textarea {
@@ -109,12 +114,14 @@ textarea {
   font-family: var(--body);
   font-size: 0.9rem;
   font-weight: 400;
+  letter-spacing: 0.05rem;
   width: 100%;
   padding: 0.4rem;
-  background: var(--neutral);
-  border-radius: 5px;
-  color: white;
   border: none;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  color: var(--text);
+  background-color: var(--offset);
 }
 
 .note {
@@ -123,23 +130,27 @@ textarea {
   padding: 1rem;
   color: var(--text);
   border-radius: 5px;
-  border: 2px solid var(--neutral);
-  background: var(--background);
+  background: var(--offset);
+  box-shadow: 0 5px 9px -5px black;
 }
 
 .note button {
   font-family: var(--body);
   margin-right: 0.5rem;
   font-size: 0.8rem;
+  text-align: center;
   font-weight: 400;
-  padding: 0.4rem;
+  letter-spacing: 0.03rem;
+  padding: 0.4rem 0.8rem;
   background: transparent;
   color: var(--text);
-  border-radius: 3px;
-  border: 1px solid var(--text);
+  border-radius: 99999px;
+  border: none;
+  box-shadow: 1px 3px 9px -4px black;
 }
 
-.note button:hover {
+button:hover {
+  cursor: pointer;
   background-color: var(--text);
   color: var(--background);
 }
