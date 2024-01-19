@@ -4,11 +4,9 @@ const noteBody = document.querySelector(".new-note-text");
 const saveNoteButton = document.querySelector(".save-new-note");
 const notes = document.querySelectorAll(".note");
 const mainContent = document.querySelector(".all-notes");
-const addNoteButton = document.querySelector(".add-note-button");
 const notesContainer = document.querySelector(".all-notes");
 const clearAll = document.querySelector(".clear-all");
 const noteFilter = document.querySelector(".search");
-const updateButton = document.querySelector(".update-note");
 const allNotes = [];
 
 // Create a new note object and push to local storage
