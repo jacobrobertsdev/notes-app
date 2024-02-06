@@ -9,7 +9,7 @@ A responsive web application for creating post-it style notes.
 
 🔗 **Live site:** [here](https://jacobrobertsdev.github.io/notes-app/)
 
-<img src="Images/notes-screenshot.png" width="600px" alt="Screenshot">
+<img src="Images/screenshot.png" width="600px" alt="Screenshot">
  
 ## Built Using
 

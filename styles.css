@@ -5,19 +5,18 @@
 }
 
 :root {
-  --background: #39393a;
-  --offset: #464648;
-  --inputs: #5e5e61;
-  --accent: #e6e6e6;
-  --neutral: #b0b0b0;
-  --text: white;
+  --background: whitesmoke;
+  --offset: #ffffff;
+  --accent: #ff5f50;
+  --neutral: #929292;
+  --text: rgb(0, 0, 0);
   --headings: "Comfortaa", sans-serif;
   --body: "Poppins", sans-serif;
-  --box-shadow: 1px 3px 9px -6px black;
+  --box-shadow: 0px 3px 6px -3px #a2a2a2b5;
 }
 
 ::placeholder {
-  color: var(--accent);
+  color: var(--neutral);
 }
 
 body {
@@ -33,12 +32,14 @@ button {
 }
 
 header {
-  margin: 1rem auto 0 auto;
-  max-width: 90%;
-  padding: 1rem;
+  margin: 1rem auto;
+  padding: 1.2rem;
+  max-width: 95%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid var(--neutral);
+  align-items: center;
+  border-radius: 9999px;
+  box-shadow: 0px 5px 6px -3px #a2a2a2;
 }
 
 header input {
@@ -48,7 +49,7 @@ header input {
   margin-right: 0.25rem;
   color: var(--text);
   padding: 0.2rem 0 0.2rem 0.8rem;
-  background: var(--inputs);
+  background: var(--offset);
   border-radius: 10000px;
   border: none;
 }
@@ -59,8 +60,8 @@ header button {
   font-weight: 400;
   letter-spacing: 0.05rem;
   padding: 0.4rem 0.8rem;
-  background: var(--offset);
-  color: var(--text);
+  background: #ff5f50;
+  color: white;
   border-radius: 99999px;
   border: none;
   box-shadow: var(--box-shadow);
@@ -86,7 +87,7 @@ main {
 }
 
 .new-note-form form {
-  margin: 1rem auto;
+  margin: 0.5rem auto;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -103,7 +104,7 @@ main {
   border-radius: 5px;
   border: none;
   color: var(--text);
-  background: var(--inputs);
+  background: var(--offset);
 }
 
 textarea {
@@ -131,7 +132,7 @@ textarea {
   color: var(--text);
   border-radius: 5px;
   background: var(--offset);
-  box-shadow: 0 5px 9px -5px black;
+  box-shadow: var(--box-shadow);
 }
 
 .note button {
@@ -146,13 +147,17 @@ textarea {
   color: var(--text);
   border-radius: 99999px;
   border: none;
-  box-shadow: 1px 3px 9px -4px black;
+  box-shadow: var(--box-shadow);
 }
 
 button:hover {
   cursor: pointer;
-  background-color: var(--text);
+  background-color: var(--accent);
   color: var(--background);
+}
+
+header button:hover {
+  background-color: var(--text);
 }
 
 .note-title {
@@ -189,8 +194,13 @@ button:hover {
     gap: 1rem;
   }
 
+  header {
+    max-width: 90%;
+    padding: 1.2rem;
+  }
+
   header input {
-    width: 15rem;
+    width: 20rem;
   }
 
   header button {
