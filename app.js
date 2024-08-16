@@ -19,7 +19,8 @@ function clearInput() {
 
 // --------------- Note creation and DOM functions ---------------//
 /*
-The createNote function creates a new note object with a current date, unique ID, title, and body (title and body from the form inputs). The note object is pushed to the allNotes array, passed to the createNoteDOM function, and saved to local storage.
+* The createNote function creates a new note object with a current date, unique ID, title, and body (title and body from the form inputs).
+* The note object is pushed to the allNotes array, passed to the createNoteDOM function, and saved to local storage.
 */
 function createNote() {
   const noteDate = new Date().toLocaleDateString();
@@ -37,7 +38,9 @@ function createNote() {
 }
 
 /*
-The createElement function accepts parameters for creating an HTML element with classes, attributes, and textContent, and returns the element (avoiding the use of the .innerHTML property).
+* The createElement function creates and returns an HTML element.
+* Avoids the use of the .innerHTML property.
+* This is a helper-function for the createNoteDOM function.
 */
 function createElement(tag, classNames = [], attributes = {}, textContent) {
   const element = document.createElement(tag);
@@ -47,13 +50,15 @@ function createElement(tag, classNames = [], attributes = {}, textContent) {
   for (let [attr, value] of Object.entries(attributes)) {
     element.setAttribute(attr, value);
   }
-  
+
   if (textContent) element.textContent = textContent;
   return element;
 }
 
 /*
-The setupEventListeners function sets up click events for all buttons that each note contains for manipulating the note after it has been created (edit, save, cancel, delete).
+* The setupEventListeners function sets up click events for all button elements in each note.
+* Specifically for buttons that manipulate the note after it has been created (edit, save, cancel, delete).
+* This is a helper-function for the createNoteDOM function.
 */
 function setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, obj) {
 
@@ -103,23 +108,23 @@ function setupEventListeners(editButton, saveButton, cancelButton, deleteButton,
 }
 
 /*
-The createNoteDOM function uses the function createElement to create the note and append all of its child elements in the DOM. It passes all button elements to the setupEventListeners function, ensuring events are applied to each individual note in the DOM.
+* The createNoteDOM function creates the note and appends all of its child elements in the DOM.
 */
-function createNoteDOM(obj) {
+function createNoteDOM(note) {
   // Note card
-  const newNote = createElement("div", ["note"], { id: obj.id }); // Note card
+  const newNote = createElement("div", ["note"], { id: note.id }); // Note card
   notesContainer.prepend(newNote);
 
   // Note title
-  const newNoteTitle = createElement("p", ["note-title"], {}, obj.title);
+  const newNoteTitle = createElement("p", ["note-title"], {}, note.title);
   newNote.appendChild(newNoteTitle);
 
   // Note body
-  const newNoteBody = createElement("p", ["note-body"], { contenteditable: "false" }, obj.body);
+  const newNoteBody = createElement("p", ["note-body"], { contenteditable: "false" }, note.body);
   newNote.appendChild(newNoteBody);
 
   // Formatted date
-  const date = createElement("p", ["note-date"], {}, obj.date);
+  const date = createElement("p", ["note-date"], {}, note.date);
   newNote.appendChild(date);
 
   // Edit note button
@@ -139,7 +144,7 @@ function createNoteDOM(obj) {
   newNote.appendChild(deleteButton);
 
   // Events for buttons related to edit note functionality.
-  setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, obj);
+  setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, note);
 };
 
 //------------------ Local storage functions -------------------//
