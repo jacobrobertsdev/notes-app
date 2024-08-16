@@ -17,7 +17,7 @@ function clearInput() {
   noteBody.value = "";
 }
 
-// --------------- Note creation and DOM functions---------------//
+// --------------- Note creation and DOM functions ---------------//
 /*
 The createNote function creates a new note object with a current date, unique ID, title, and body (title and body from the form inputs). The note object is pushed to the allNotes array, passed to the createNoteDOM function, and saved to local storage.
 */
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-//------------- Form submit and clear-all events ------------------//
+//------------------ Form submit and clear-all events ------------------//
 // Save new note (form submit)
 saveNoteButton.addEventListener("click", () => {
   if (noteTitle.value === "" || noteBody.value === "") {
