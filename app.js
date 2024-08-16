@@ -1,15 +1,26 @@
-const newNoteForm = document.querySelector(".new-note-form");
-const noteTitle = document.querySelector(".new-note-title");
-const noteBody = document.querySelector(".new-note-text");
-const saveNoteButton = document.querySelector(".save-new-note");
-const notes = document.querySelectorAll(".note");
-const mainContent = document.querySelector(".all-notes");
-const notesContainer = document.querySelector(".all-notes");
-const clearAll = document.querySelector(".clear-all");
-const noteFilter = document.querySelector(".search");
+// Get elements
+const newNoteForm = document.querySelector(".new-note-form"); // Form for adding a note
+const noteTitle = document.querySelector(".new-note-title"); // Note title form input
+const noteBody = document.querySelector(".new-note-text"); // Note body form input
+const saveNoteButton = document.querySelector(".save-new-note"); // Save note button (form submit)
+const notes = document.querySelectorAll(".note"); // All notes in the DOM
+const notesContainer = document.querySelector(".all-notes"); // Notes container element
+const clearAll = document.querySelector(".clear-all"); // Clear all notes button
+const noteFilter = document.querySelector(".search"); // Search bar input
+
+// Array for storing note objects (passed to local storage)
 const allNotes = [];
 
-// Create a new note object and push to local storage
+// Clears the form input fields
+function clearInput() {
+  noteTitle.value = "";
+  noteBody.value = "";
+}
+
+// --------------- Note creation and DOM functions---------------//
+/*
+The createNote function creates a new note object with a current date, unique ID, title, and body (title and body from the form inputs). The note object is pushed to the allNotes array, passed to the createNoteDOM function, and saved to local storage.
+*/
 function createNote() {
   const noteDate = new Date().toLocaleDateString();
   const uniqueId = crypto.randomUUID().toString();
@@ -18,54 +29,35 @@ function createNote() {
     date: noteDate,
     title: noteTitle.value,
     body: noteBody.value,
-  };
+    };
 
   allNotes.push(note);
-  createNoteDOM(note, uniqueId);
+  createNoteDOM(note);
   saveLocalStorage();
 }
 
-// Create the note in the DOM with associated event listeners (without .innerHTML)
-function createNoteDOM(obj, id) {
-  const newNote = document.createElement("div");
-  newNote.classList.add("note");
-  newNote.setAttribute("id", id);
-  notesContainer.prepend(newNote);
+/*
+The createElement function accepts parameters for creating an HTML element with classes, attributes, and textContent, and returns the element (avoiding the use of the .innerHTML property).
+*/
+function createElement(tag, classNames = [], attributes = {}, textContent) {
+  const element = document.createElement(tag);
+  if (classNames.length) element.classList.add(...classNames);
 
-  const newNoteTitle = document.createElement("p");
-  newNoteTitle.classList.add("note-title");
-  newNoteTitle.textContent = obj.title;
-  newNote.appendChild(newNoteTitle);
+  // Destructures the key-value pairs from the Object.entries array and sets the attributes
+  for (let [attr, value] of Object.entries(attributes)) {
+    element.setAttribute(attr, value);
+  }
+  
+  if (textContent) element.textContent = textContent;
+  return element;
+}
 
-  const newNoteBody = document.createElement("p");
-  newNoteBody.classList.add("note-body");
-  newNoteBody.setAttribute("contenteditable", "false");
-  newNoteBody.textContent = obj.body;
-  newNote.appendChild(newNoteBody);
+/*
+The setupEventListeners function sets up click events for all buttons that each note contains for manipulating the note after it has been created (edit, save, cancel, delete).
+*/
+function setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, obj) {
 
-  const date = document.createElement("p");
-  date.classList.add("note-date");
-  date.textContent = obj.date;
-  newNote.appendChild(date);
-
-  const editButton = document.createElement("button");
-  editButton.classList.add("edit-note");
-  editButton.textContent = "Edit";
-  newNote.appendChild(editButton);
-
-  const saveButton = document.createElement("button");
-  saveButton.classList.add("save-note");
-  saveButton.classList.toggle("hidden");
-  saveButton.textContent = "Save";
-  newNote.appendChild(saveButton);
-
-  const cancelButton = document.createElement("button");
-  cancelButton.textContent = "Cancel";
-  newNote.appendChild(cancelButton);
-  cancelButton.classList.add("cancel");
-  cancelButton.classList.toggle("hidden");
-
-  editButton.addEventListener("click", (e) => {
+  editButton.addEventListener("click", () => { // Event for Edit note button
     cancelButton.classList.toggle("hidden");
     saveButton.classList.toggle("hidden");
     editButton.classList.toggle("hidden");
@@ -74,15 +66,14 @@ function createNoteDOM(obj, id) {
     newNoteBody.focus();
   });
 
-  saveButton.addEventListener("click", () => {
+  saveButton.addEventListener("click", () => { // Save button event for saving note edits and updating local storage
     const data = JSON.parse(localStorage.getItem("Notes")) || [];
-    const newArray = data.map((item) => {
+    const newArray = data.map(item => {
       if (item.title === newNoteTitle.textContent) {
         item.body = newNoteBody.textContent;
         return item;
-      } else {
-        return item;
       }
+      return item;
     });
     localStorage.setItem("Notes", JSON.stringify(newArray));
     newNoteBody.setAttribute("contenteditable", "false");
@@ -92,7 +83,7 @@ function createNoteDOM(obj, id) {
     newNoteBody.style.fontStyle = "normal";
   });
 
-  cancelButton.addEventListener("click", () => {
+  cancelButton.addEventListener("click", () => { // Event to cancel edit
     newNoteBody.textContent = obj.body;
     newNoteBody.setAttribute("contenteditable", "false");
     newNoteBody.blur();
@@ -102,20 +93,56 @@ function createNoteDOM(obj, id) {
     newNoteBody.style.fontStyle = "normal";
   });
 
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete-note");
-  deleteButton.textContent = "Delete";
+  deleteButton.addEventListener("click", (e) => { // Event for deleting the current note from the DOM and local storage
+    const data = JSON.parse(localStorage.getItem("Notes")) || [];
+    const newArray = data.filter((currentNote) => obj.id != currentNote.id);
+    const currentNote = e.target.closest("div");
+    localStorage.setItem("Notes", JSON.stringify(newArray));
+    currentNote.remove();
+  })
+}
+
+/*
+The createNoteDOM function uses the function createElement to create the note and append all of its child elements in the DOM. It passes all button elements to the setupEventListeners function, ensuring events are applied to each individual note in the DOM.
+*/
+function createNoteDOM(obj) {
+  // Note card
+  const newNote = createElement("div", ["note"], { id: obj.id }); // Note card
+  notesContainer.prepend(newNote);
+
+  // Note title
+  const newNoteTitle = createElement("p", ["note-title"], {}, obj.title);
+  newNote.appendChild(newNoteTitle);
+
+  // Note body
+  const newNoteBody = createElement("p", ["note-body"], { contenteditable: "false" }, obj.body);
+  newNote.appendChild(newNoteBody);
+
+  // Formatted date
+  const date = createElement("p", ["note-date"], {}, obj.date);
+  newNote.appendChild(date);
+
+  // Edit note button
+  const editButton = createElement("button", ["edit-note"], {}, "Edit");
+  newNote.appendChild(editButton);
+
+  // Save edit button
+  const saveButton = createElement("button", ["save-note", "hidden"], {}, "Save");
+  newNote.appendChild(saveButton);
+
+  // Cancel edit button
+  const cancelButton = createElement("button", ["cancel", "hidden"], {}, "Cancel");
+  newNote.appendChild(cancelButton);
+
+  // Delete note button
+  const deleteButton = createElement("button", ["delete-note"], {}, "Delete");
   newNote.appendChild(deleteButton);
-}
 
-// Clear the new note input fields
-function clearInput() {
-  noteTitle.value = "";
-  noteBody.value = "";
-}
+  // Events for buttons related to edit note functionality.
+  setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, obj);
+};
 
-//------------------Local storage-------------------//
-
+//------------------ Local storage functions -------------------//
 // Load local storage
 function getLocalStorage() {
   const data = JSON.parse(localStorage.getItem("Notes")) || [];
@@ -135,31 +162,16 @@ function saveLocalStorage() {
   localStorage.setItem("Notes", JSON.stringify(allNotes));
 }
 
-// Remove items from local storage and update DOM
-mainContent.addEventListener("click", (e) => {
-  if (mainContent.hasChildNodes()) {
-    const data = JSON.parse(localStorage.getItem("Notes")) || [];
 
-    const target = e.target;
-    const note = e.target.closest("div");
-    const noteId = note.getAttribute("id").toString();
-
-    if (target.classList.contains("delete-note")) {
-      const newArray = data.filter((currentNote) => noteId != currentNote.id);
-      note.remove();
-      localStorage.setItem("Notes", JSON.stringify(newArray));
-    }
-  }
-});
-
-// Create DOM on reload
+// Render notes from local storage on load
 document.addEventListener("DOMContentLoaded", () => {
   allNotes.length = 0; // Clear the array before populating it
   getLocalStorage();
 });
 
-//-------------Button Events------------------
-// Save new note
+
+//------------- Form submit and clear-all events ------------------//
+// Save new note (form submit)
 saveNoteButton.addEventListener("click", () => {
   if (noteTitle.value === "" || noteBody.value === "") {
     alert("Please enter a valid input");
@@ -174,7 +186,7 @@ newNoteForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 
-// Clear all notes
+// Clear all notes button
 clearAll.addEventListener("click", () => {
   if (confirm("Are you sure you want to clear all of your notes?")) {
     // Remove all note elements from the DOM
@@ -187,7 +199,8 @@ clearAll.addEventListener("click", () => {
     localStorage.clear();
   }
 });
-// ---------------Filter notes with search---------------
+
+//--------------- Filter and Search ---------------//
 noteFilter.addEventListener("keyup", () => {
   const titles = document.querySelectorAll(".note-title");
   const query = noteFilter.value.toLowerCase();

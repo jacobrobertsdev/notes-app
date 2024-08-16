@@ -11,42 +11,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Poppins:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
   </head>
+  
   <body>
     <header>
-      <input
-        type="text"
-        name="Search Bar"
-        id="search"
-        class="search"
-        placeholder="Search notes..."
-      />
+      <input type="text" name="Search Bar" id="search" class="search" placeholder="Search notes..."/>
       <button class="clear-all">Clear</button>
     </header>
+
     <main>
       <section class="new-note-form">
         <form>
-          <input
-            type="text"
-            class="new-note-title"
-            placeholder="Title"
-            maxlength="62"
-          />
-          <textarea
-            class="new-note-text"
-            cols="35"
-            rows="5"
-            maxlength="200"
-            placeholder="Add note..."
-          ></textarea>
+          <input type="text" class="new-note-title" placeholder="Title" maxlength="62"/>
+          <textarea class="new-note-text" cols="35" rows="5" maxlength="200" placeholder="Add note..."></textarea>
           <button class="save-new-note">+ Add note</button>
         </form>
       </section>
 
       <section class="all-notes"></section>
     </main>
+
     <script src="app.js"></script>
   </body>
 </html>
