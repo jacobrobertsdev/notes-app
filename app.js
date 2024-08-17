@@ -60,7 +60,7 @@ function createElement(tag, classNames = [], attributes = {}, textContent) {
 * Specifically for buttons that manipulate the note after it has been created (edit, save, cancel, delete).
 * This is a helper-function for the createNoteDOM function.
 */
-function setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, obj) {
+function setupEventListeners(editButton, saveButton, cancelButton, deleteButton, newNoteBody, newNoteTitle, note) {
 
   editButton.addEventListener("click", () => { // Event for Edit note button
     cancelButton.classList.toggle("hidden");
@@ -89,7 +89,7 @@ function setupEventListeners(editButton, saveButton, cancelButton, deleteButton,
   });
 
   cancelButton.addEventListener("click", () => { // Event to cancel edit
-    newNoteBody.textContent = obj.body;
+    newNoteBody.textContent = note.body;
     newNoteBody.setAttribute("contenteditable", "false");
     newNoteBody.blur();
     cancelButton.classList.toggle("hidden");
@@ -100,7 +100,7 @@ function setupEventListeners(editButton, saveButton, cancelButton, deleteButton,
 
   deleteButton.addEventListener("click", (e) => { // Event for deleting the current note from the DOM and local storage
     const data = JSON.parse(localStorage.getItem("Notes")) || [];
-    const newArray = data.filter((currentNote) => obj.id != currentNote.id);
+    const newArray = data.filter((currentNote) => note.id != currentNote.id);
     const currentNote = e.target.closest("div");
     localStorage.setItem("Notes", JSON.stringify(newArray));
     currentNote.remove();
